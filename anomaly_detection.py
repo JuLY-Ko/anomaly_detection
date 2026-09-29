@@ -66,7 +66,7 @@ def main():
     print(f'Normal accuracy: {tn/(tn+fp):.4%}')
     print(f'Anormaly accuracy: {tp/(tp+fn):.4%}')
 
-    fig, axes = plt. subplots(2,1, figsize=(14,8), contrained_layout=True)
+    fig, axes = plt. subplots(2,1, figsize=(14,8), constrained_layout=True)
 
     for ax, stop, title in [(axes[0], len(x),'full nitrate series'),(axes[1], min(len(x),2500), 'first 2500 observations')]:
         index= np.arange(stop)
