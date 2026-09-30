@@ -66,15 +66,17 @@ def main():
     print(f'Normal accuracy: {tn/(tn+fp):.4%}')
     print(f'Anormaly accuracy: {tp/(tp+fn):.4%}')
 
-    fig, axes = plt. subplots(2,1, figsize=(14,8), constrained_layout=True)
+    fig, ax = plt. subplots(figsize=(14,5), constrained_layout=True)
 
-    for ax, stop, title in [(axes[0], len(x),'full nitrate series'),(axes[1], min(len(x),2500), 'first 2500 observations')]:
-        index= np.arange(stop)
-        ax.plot(index, x[:stop],lw=0.6,color='red',label='NO3N')
-        marked=index[pred[:stop]]
-        ax.scatter(marked, x[marked],s=11, color='blue',label='Predicted anomaly',zorder=3)
-        ax.set(xlabel='Observation index', ylabel='NO3N', title=title)
-        ax.legend(loc='upper right')
+    index = np.arange(len(x))
+
+    ax.plot(index, x, lw=0.6, color='red', label='NO3N')
+
+    marked = index[pred]
+    ax.scatter(marked, x[marked],s=11, color = 'blue', label='Predicted anomaly', zorder = 3)
+
+    ax.set(xlabel='Obervation index', ylabel = 'NO3N', title = 'Full nitrate series')
+    ax.legend(loc='upper right')
     
     fig.savefig(args.output / 'detected_anomalies.png',dpi=160)
     plt.close(fig)
